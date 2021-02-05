@@ -10,14 +10,7 @@ void setup() {
   Serial.begin(9600);
   fromESP.begin(9600);
 
-  debug("Starting");
   delay(5000);
-  
-  long randNumber = random(100);
-
-  String result = post("http://192.168.178.36:4365/humidity", String("{ \"value\": ") + randNumber + String(" }"));
-  
-  debug("RESULT: " + result);
 }
 
 String post(String url, String payload) {
@@ -51,12 +44,20 @@ String get(String url) {
 }
 
 void loop() {
+  Serial.print("http://192.168.178.36:4365/humidity");
+
   String result = "";
+
   while (result == "") {
     while (fromESP.available()) {
       result = fromESP.readString();
     }
   }
+  Serial.print("http://192.168.178.36:4365/DONE" + result);
+  delay(60000);
+  // long randNumber = random(100);
 
-  debug("RESULT: " + result);
+  // String result = post("http://192.168.178.36:4365/humidity", String("{ \"value\": ") + randNumber + String(" }"));
+  
+  // debug("RESULT: " + result);
 }
