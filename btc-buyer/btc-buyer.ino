@@ -1,4 +1,5 @@
 #include "http.h"
+#include "date.h"
 
 void setup() {
   setupWifi();
@@ -6,7 +7,11 @@ void setup() {
 
 void loop() {
   if (wifiReady()) {
-    Serial.print(get("http://worldtimeapi.org/api/ip.txt"));
+    String currentTime = currentIsoString();
+    String currentDay = getMonthDay(currentTime);
+    int day = currentDay.toInt();
+
+    Serial.print(day);
   } else {
     Serial.println("Error in WiFi connection");
   }
