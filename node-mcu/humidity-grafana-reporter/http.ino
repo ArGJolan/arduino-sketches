@@ -6,9 +6,13 @@ void setupWifi() {
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.println("Waiting for connection");
+    if (WIFI_DEBUG) {
+      Serial.println("Waiting for connection");
+    }
   }
-  Serial.println("Connected to " + String(WIFI_SSID));
+  if (WIFI_DEBUG) {
+    Serial.println("Connected to " + String(WIFI_SSID));
+  }
 }
 
 String post(char *url, char *payload) {

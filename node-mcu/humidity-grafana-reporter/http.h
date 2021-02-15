@@ -2,6 +2,8 @@
 #include <ESP8266WiFi.h>
 #include "secret.h"
 
+#define WIFI_DEBUG false
+
 void setupWifi();
 String post(char *url, char *payload);
 String get(char *url);

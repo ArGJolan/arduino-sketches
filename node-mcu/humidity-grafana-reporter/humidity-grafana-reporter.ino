@@ -1,19 +1,17 @@
-#include  <HardwareSerial.h>
 #include  "http.h"
+#include  "humidity-grafana-reporter.h"
 
 void setup() {
-  Serial.begin(9600);
-
   setupWifi();
-  Serial.print("Starting up...");
+  
+  int humidity = analogRead(A0);
+  int percentHumidity = map(humidity, SENSOR_WET, SENSOR_DRY, 100, 0);
+
+  String result = post(String(API_ENDPOINT) + String("/humidity"), String("{ \"value\": ") + String(percentHumidity) + String(" }"));
+
+  ESP.deepSleep(3600e6);
 }
 
 void loop() {
-  long randNumber = random(100);
 
-  String result = post("http://192.168.178.36:4365/humidity", String("{ \"value\": ") + String(randNumber) + String(" }"));
-
-  Serial.println(result);
-
-  delay(60000);
 }

@@ -1,0 +1,3 @@
+#define API_ENDPOINT "http://192.168.178.36:4365"
+#define SENSOR_WET 297
+#define SENSOR_DRY 740
